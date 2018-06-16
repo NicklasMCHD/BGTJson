@@ -1,0 +1,37 @@
+#include "json.bgt"
+
+// Note: This test implementation uses dictionaries to load and save data. You could also do it with arrays or some other form.
+
+// this is just an example function.
+// this function takes a dictionary and a filename.
+// It basicly just saves the parsed json data to a file.
+void save(dictionary@ d, string filename) {
+file f;
+f.open(filename, "wb");
+f.write(json_encode(d));
+f.close();
+}
+
+// this function is just an example function.
+// this function takes a filename.
+// this function returns a dictionary with the parsed data from the file.
+dictionary@ load(string filename) {
+file f;
+f.open(filename, "rb");
+string json = f.read();
+f.close();
+return json_decode(json);
+}
+
+
+void main() {
+show_game_window("json performance test");
+dictionary k;
+for(uint x=0;x<10;x++) {
+k.set("testvalue"+random(-10000000000,10000000000),"this is a test string");
+}
+
+save(k, "data.json");
+dictionary l = load("data.json");
+alert("result", l.get_keys().length + "");
+}
