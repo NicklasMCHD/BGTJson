@@ -9,8 +9,9 @@
 string json_encode(dictionary@ unparsed_data) {
 string parsed_data;
 parsed_data = "{";
-for (uint x = 0; x<unparsed_data.get_keys().length; x++) {
-string key = unparsed_data.get_keys()[x];
+string[] unparsed_keys = unparsed_data.get_keys();
+for (uint x = 0; x<unparsed_keys.length; x++) {
+string key = unparsed_keys[x];
 string value;
 unparsed_data.get(key, value);
 parsed_data = parsed_data + "\"" + key + "\":\"" + value + "\",";
